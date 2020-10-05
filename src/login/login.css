@@ -1,0 +1,23 @@
+.description{
+    display: inline-block;
+    padding-top: 30%;
+    padding-left: 5%;
+    width: 40%;
+    height: 100vh;
+    background-color: #000;
+  }
+  
+  .description h1, p{
+    color: #FFF;
+  }
+  
+  .formulario{
+    display: inline-block;
+    width: 60%;
+    padding: 30px;
+  }
+  
+  .btn-register{
+    margin-left: 30px;
+    opacity: 0.6;
+  }
