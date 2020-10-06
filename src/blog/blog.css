@@ -1,0 +1,13 @@
+.letra-nv{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  .color-letra{
+    color: #000;
+  }
+  
+  .conten-card{
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }

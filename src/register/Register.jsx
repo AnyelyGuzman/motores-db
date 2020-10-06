@@ -13,31 +13,28 @@ import User from '../firebase/User'
 
 export default class Register extends React.Component{
 
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
-      nombre: '',
-      edad: 0,
       correo: '',
-      usuario: '',
-      contrasena: ''
+      contrasena: '',
+      error: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.users = new User()
   }
 
-  handleClick(e) {
+  async handleClick(e) {
     e.preventDefault()
-    // this.users.insert({
-    //   nombre: this.state.nombre,
-    //   edad: this.state.edad,
-    //   correo: this.state.correo,
-    //   usuario: this.state.usuario,
-    //   contrasena: this.state.contrasena
-    // })
+    
+    const response = await this.users.register({
+      correo: this.state.correo,
+      contrasena: this.state.contrasena
+    })
 
-    this.users.getAll()
+    if(response && response.operationType === "signIn") this.props.history.push("/")
+    else this.setState({ error: true })
   }
 
   handleChange(event) {
@@ -57,26 +54,21 @@ export default class Register extends React.Component{
           <div className="con_for">
             <h1>Registrate</h1>
             <br />
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Nombre Completo</Form.Label>
-              <Form.Control type="text" placeholder="Nombre Completo" id="nombre" onChange={this.handleChange} value={this.state.nombre} />
-            </Form.Group>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Edad</Form.Label>
-              <Form.Control type="number" id="edad" onChange={this.handleChange} value={this.state.edad} placeholder="Edad" />
-            </Form.Group>
+            
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Correo Electronico</Form.Label>
-              <Form.Control type="text" id="correo" onChange={this.handleChange} value={this.state.correo} placeholder="Correo Electronico" />
+              <Form.Control type="email" id="correo" onChange={this.handleChange} value={this.state.correo} placeholder="Correo Electronico" />
             </Form.Group>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Usuario</Form.Label>
-              <Form.Control type="text" id="usuario" onChange={this.handleChange} value={this.state.usuario} placeholder="Usuario" />
-            </Form.Group>
+            
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Contraseña</Form.Label>
               <Form.Control type="password" id="contrasena" onChange={this.handleChange} value={this.state.contrasena} placeholder="Contraseña" />
             </Form.Group>
+
+            {
+              this.state.error && <p class="error">La contraseña debe contener como minimo 6 caracteres</p>
+            }
+
             <Button variant="dark" type="submit" onClick={ this.handleClick }>
               Registrar
             </Button>

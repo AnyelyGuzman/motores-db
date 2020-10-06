@@ -1,31 +1,37 @@
 import Index from './Index'
-import config from "./config.json"
-import firebase from 'firebase'
 
 export default class User extends Index {
 
   constructor() {
     super()
-    this.users = this.database.ref("usuarios")
+    this.users = this.database.auth()
   }
 
   /**
    *  
-   * @param { nombre: String, edad: Number, correo: String, usuario: String, contrasena: string } obj 
-   * @description Permite la insercion en firebase de los datos del usuario
+   * @param { correo: String, contrasena: string } obj 
+   * @description Permite el registro de un usuario
    */
-  insert(obj) {
-    this.users.push(obj)
+  async register(obj) {
+    try {
+      const resp =  await this.users.createUserWithEmailAndPassword(obj.correo, obj.contrasena)
+      return resp
+    }catch(e) {
+      console.log(e)
+    }
   }
 
-  getAll() {
-    this.users.on('value', value => {
-      console.log(value.val())
-    })
+  /**
+   *  
+   * @param { correo: String, contrasena: string } obj 
+   * @description Permite el logueo de un usuario
+   */
+  async login(obj) {
+    try {
+      const resp = await this.users.signInWithEmailAndPassword(obj.correo, obj.contrasena)
+      return resp
+    } catch (e) {
+      console.log(e)
+    }
   }
-
-  edit(obj) {
-    this.users.child('').set(obj)
-  }
-
 }
