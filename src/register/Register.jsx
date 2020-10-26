@@ -22,7 +22,7 @@ export default class Register extends React.Component{
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
-    this.users = new User()
+    this.users = new User() 
   }
 
   async handleClick(e) {
@@ -74,7 +74,7 @@ export default class Register extends React.Component{
             </Button>
             <Link to="/">
               <Button className="btn-login" variant="dark" type="submit">
-                Login
+                Login 
               </Button>
             </Link>
           </div>

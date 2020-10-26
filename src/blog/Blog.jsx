@@ -6,6 +6,8 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import FormFile from 'react-bootstrap/FormFile'
+import { Form } from 'react-bootstrap'
 
 
 export default class Blog extends React.Component{
@@ -31,7 +33,21 @@ export default class Blog extends React.Component{
                         </Card.Body>
                     </Card>
                     </div>
+
+                    <div className="conten-card">
+                    <Card style={{ width: '1000px', margin:'auto' }}> 
+                        <Card.Body>
+                            <input style={{marginLeft: '36%'}} type="text" name="" id="" placeholder="Titulo"/>
+                            <FormFile/>
+                            <textarea name="" id="" cols="89" rows="10" placeholder="Descripcion"></textarea>
+                            <Button style={{ height: '40px', display:'block' }} variant="primary">Publicar</Button>
+                        </Card.Body>
+                        
+                    </Card>
+                    </div>
                 </>
+
+
             )
     }
 }
